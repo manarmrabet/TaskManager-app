@@ -10,11 +10,13 @@ import UserDashboard from './pages/User/UserDashboard';
 import MyTasks from './pages/User/MyTasks';
 import ViewTaskDetails from './pages/User/ViewTaskDetails';
 import PrivateRoute from './routes/PrivateRoute';
+import Welcome from './pages/welcome';
 const App =()=>{
   return(
     <div >
       <Router>
         <Routes>
+          <Route path="/" element={<Welcome/>} />
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<SignUp/>}/>
           {/*Admin Routes */}
@@ -28,15 +30,16 @@ const App =()=>{
 
 
           {/*User Routes */}
-          <Route  element={<PrivateRoute allowedRoles={["admin"]}/>}>
+          
           <Route path="/user/dashboard" element={<UserDashboard/>}/>
           <Route path="/user/tasks" element={<MyTasks/>}/>
           <Route path="/user/task-details/:id" element={<ViewTaskDetails/>}/>
          
-          </Route>
+         
 
         </Routes>
       </Router>
+      
     </div>
   )
 }

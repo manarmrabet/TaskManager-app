@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import AuthLayout from '../../components/layouts/AuthLayout'
-import { useNavigate } from 'react-router-dom';
+
 import Input from '../../components/inputs/Input';
 import { Link } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Login =()=>{
   const [email , setEmail]=useState("");
   const [password , setPassword]=useState("");
   const [error , setError]=useState(null);
+  const navigate = useNavigate();
 
-  const navigate =useNavigate();
+  
  
   // Handle Login Form Submit
   const handleLogin = async(e)=>{
@@ -25,14 +28,18 @@ const Login =()=>{
       return;
     }
     setError("");
-    //Login API call
-    try{
+    const fakeLoginSuccess = true;
 
-    }catch(error){
-      
+    if (fakeLoginSuccess) {
+      navigate('/user/dashboard'); 
+    } else {
+      setError("Invalid credentials."); 
     }
-        
   };
+    
+    
+        
+  
   return(
     <AuthLayout >
       <div className='lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center'>
@@ -54,7 +61,7 @@ const Login =()=>{
           type="password"/>
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
-          <button type="submit" className='btn-primary'>LOGIN</button>
+          <button type="submit" className='btn-primary' >LOGIN</button>
           <p className='text-[13px] text-slate-800 mt-3'>
             Don't have an account?{""}
          <Link className='font-medium text-primary underline' to="/signup">SignUp</Link>
